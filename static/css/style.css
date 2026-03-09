@@ -95,3 +95,54 @@ button:disabled {
 .btn-secondary:hover {
   background: #5a6268;
 }
+
+.group select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 160px;
+}
+
+.mode-switch label {
+  display: inline-block;
+  margin-right: 16px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.input-block {
+  margin-bottom: 8px;
+}
+
+.short-input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.progress-wrap {
+  margin-top: 16px;
+}
+
+.progress-bar {
+  height: 22px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #0d6efd, #0a58ca);
+  border-radius: 6px;
+  transition: width 0.25s ease;
+}
+
+.progress-text {
+  margin-top: 6px;
+  font-size: 0.9em;
+  color: #495057;
+}

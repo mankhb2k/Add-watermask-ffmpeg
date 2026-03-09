@@ -9,12 +9,57 @@
     <div class="container">
       <h2>Chèn Logo Hàng Loạt</h2>
       <div class="group">
-        <label>Chọn Logo (PNG/SVG):</label>
-        <input type="file" id="logo" accept="image/*" />
+        <label>Chế độ nguồn:</label>
+        <div class="mode-switch">
+          <label><input type="radio" name="input_mode" value="upload" checked /> Upload file</label>
+          <label><input type="radio" name="input_mode" value="folder" /> Chọn folder (đường dẫn trên máy)</label>
+        </div>
+      </div>
+      <div id="upload_block" class="input-block">
+        <div class="group">
+          <label>Chọn Logo (PNG/SVG):</label>
+          <input type="file" id="logo" accept="image/*" />
+        </div>
+        <div class="group">
+          <label>Chọn nhiều Video:</label>
+          <input type="file" id="videos" multiple accept="video/*" />
+        </div>
+      </div>
+      <div id="folder_block" class="input-block" style="display: none;">
+        <div class="group">
+          <label>Folder chứa video (đường dẫn tuyệt đối):</label>
+          <input type="text" id="folder_videos" placeholder="Ví dụ: D:\Videos\input" />
+          <span class="hint">Trên máy chạy server. Các file .mp4, .mkv, .mov... trong folder sẽ được xử lý.</span>
+        </div>
+        <div class="group">
+          <label>File logo (đường dẫn tuyệt đối):</label>
+          <input type="text" id="folder_logo" placeholder="Ví dụ: D:\Videos\logo.png" />
+          <span class="hint">Đường dẫn tới 1 file ảnh logo (PNG, ...).</span>
+        </div>
       </div>
       <div class="group">
-        <label>Chọn nhiều Video:</label>
-        <input type="file" id="videos" multiple accept="video/*" />
+        <label>Tỷ lệ video đầu ra:</label>
+        <select id="video_ratio">
+          <option value="9:16" selected>9:16 (dọc)</option>
+          <option value="16:9">16:9 (ngang)</option>
+          <option value="original">Giữ nguyên</option>
+        </select>
+        <span class="hint">Video sẽ được scale/pad để đúng tỷ lệ (9:16 hoặc 16:9) hoặc giữ nguyên.</span>
+      </div>
+      <div class="group">
+        <label>Kích thước logo (% chiều cao video):</label>
+        <input type="number" id="logo_scale" value="5" min="2" max="15" step="1" class="short-input" /> %
+        <span class="hint">Từ 2 đến 15%. Mặc định nhỏ, chỉ chỉnh nhỏ hơn nếu cần. Logo luôn đặt chính giữa.</span>
+      </div>
+      <div class="group">
+        <label>Vị trí logo (% từ dưới lên):</label>
+        <input type="number" id="logo_bottom_pct" value="10" min="0" max="60" step="1" class="short-input" /> %
+        <span class="hint">0% = sát đáy, 10% = cách đáy 10% chiều cao video, 40% = vùng giữa-dưới.</span>
+      </div>
+      <div class="group">
+        <label>Độ mờ logo (%):</label>
+        <input type="number" id="logo_opacity" value="50" min="0" max="100" step="5" class="short-input" /> %
+        <span class="hint">0% = trong suốt, 100% = không mờ. Mặc định 50%.</span>
       </div>
       <div class="group">
         <label>Thư mục lưu sau khi xử lý:</label>
@@ -26,6 +71,12 @@
         <span class="hint" id="picked_folder_hint"></span>
       </div>
       <button onclick="startProcessing()" id="btn">Bắt đầu xử lý</button>
+      <div id="progress_wrap" class="progress-wrap" style="display: none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress_fill"></div>
+        </div>
+        <div class="progress-text" id="progress_text">0 / 0</div>
+      </div>
       <div id="status"></div>
     </div>
 
